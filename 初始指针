@@ -9,3 +9,12 @@ int main()
 	printf("%s\n",p);
 	return 0;
 }
+int main()
+{
+
+	char* p= "abcdef";
+
+	printf("%c\n", *p;//打印首元素
+	printf("%s\n",p);//打印指针p指向的数组内容
+	return 0;
+}
