@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+void menu()
+{
+	printf("******************\n");
+	printf("***1.add *2.sub***\n");
+	printf("***3.mul *4.div***\n");
+	printf("******0.exit******\n");
+}
+int add(int x, int y)
+{
+	return x + y;
+}
+int sub(int x, int y)
+{
+	return x - y;
+}
+int mul(int x, int y)
+{
+	return x * y;
+}
+int div(int x, int y)
+{
+	return x / y;
+}
+int main()
+{
+	//int a = 10;
+	//int b = 20;
+	//int (*p)(int, int) = add;
+	//printf("%d\n", (*p)(10, 20));
+	//printf("%d\n", p(10, 20));
+	int i = 0;
+	int j, k;
+	int (*p[])(int, int) = { 0,add,sub,mul,div };
+	do
+	{
+		menu();
+		printf("请选择计算方式：\n");
+		scanf_s("%d", &i);
+		if (i >= 1 && i <= 4)
+		{
+			printf("请输入两个数\n");
+			scanf_s("%d%d", &j, &k);
+			int r = p[i](j, k);
+			printf("%d\n", r);
+		}
+		else if (i == 0)
+		{
+			printf("退出\n");
+		}
+		else
+			printf("输入错误请重试\n");
+	} while (i);
+	return 0;
+}
