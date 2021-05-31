@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	//int arr[] = { 1,2,3,4,5,6,7,8,9,0 };         *******一*********
+	//printf("%d \n", sizeof(arr));//40,数组空间大小，单位字节
+	//printf("%d \n", sizeof(arr+0));//4，首元素地址
+	//printf("%d \n", sizeof(*arr));//4，首元素的大小
+	//printf("%d \n", sizeof(arr[1]));//4，第二个的元素大小
+	//printf("%d \n", sizeof(&arr));//4，数组地址，地址的大小是4字节
+	//printf("%d \n", sizeof(* &arr));40，整个数组的大小
+	//printf("%d \n", sizeof(&arr+1));//4，数组地址
+	//printf("%d \n", sizeof(&arr[0]+1));//4，数组地址
+
+	//char arr[] = { 'a','b' ,'c','d','e','f'}; *******二*********
+	//printf("%d \n", sizeof(arr));//6,数组大小，单位字节
+	//printf("%d \n", sizeof(arr + 0));//4，首元素地址，地址大小为4
+	//printf("%d \n", sizeof(*arr));//1，首元素的大小
+	//printf("%d \n", sizeof(arr[1]));//1，第二个的元素大小
+	//printf("%d \n", sizeof(&arr));//4，数组地址
+	//printf("%d \n", sizeof(&arr + 1));//4，跳过当前数组地址后的地址
+	//printf("%d \n", sizeof(&arr[0] + 1));//4，首元素数地址+1的地址，即第二个元素的地址
+
+
+	//char arr[] = { 'a','b' ,'c','d','e','f' }; *******三*********
+	//printf("%d \n", strlen(arr));//随机值,求数组大小，直到遇到/0,/0位置不确定，单位字节
+	//printf("%d \n",strlen(arr + 0));//随机值，求数组大小，直到遇到/0,/0位置不确定，单位字节
+//	printf("%d \n", strlen(*arr));//报错，strlen接收的是地址，*arr传过来是字符a,非法访问
+//printf("%d \n", strlen(arr[1]));//报错，strlen接收的是地址，*arr传过来是字符b,非法访问
+	//printf("%d \n", strlen(&arr));//随机值，求数组大小，直到遇到/0,/0位置不确定，单位字节
+	//printf("%d \n", strlen(&arr + 1));//随机值，跳过arr数组地址,差6
+	//printf("%d \n", strlen(&arr[0] + 1));//随机值，差1
+
+	//char arr[] = "abcdef"; *******四*********
+	//printf("%d \n", sizeof(arr));//7,数组大小，含有/0,单位字节
+	//printf("%d \n", sizeof(arr + 0));//4，首元素地址，地址大小为4
+	//printf("%d \n", sizeof(*arr));//1，首元素的大小
+	//printf("%d \n", sizeof(arr[1]));//1，第二个的元素大小
+	//printf("%d \n", sizeof(&arr));//4，数组地址
+	//printf("%d \n", sizeof(&arr + 1));//4，跳过当前数组地址后的地址
+	//printf("%d \n", sizeof(&arr[0] + 1));//4，首元素数地址+1的地址，即第二个元素的地址
+
+	//char arr[] = "abcdef"; *******五*********
+	//printf("%d \n", strlen(arr));//6,求数组大小，直到遇到/0,但不算/0，单位字节
+	//printf("%d \n",strlen(arr + 0));//6，从首元素往后统计直到遇到/0
+//	printf("%d \n", strlen(*arr));//报错，strlen接收的是地址，*arr传过来是字符a,非法访问
+	//printf("%d \n", strlen(arr[1]));//报错，strlen接收的是地址，*arr传过来是字符b,非法访问
+	//printf("%d \n", strlen(&arr));//6，数组地址，等于数组首元素的地址，往后统计
+	//printf("%d \n", strlen(&arr + 1));//随机值，跳过arr数组地址,然后计算
+	//printf("%d \n", strlen(&arr[0] + 1));//5，从b的地址往后数
+	return 0;
+}
