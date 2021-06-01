@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+
+void swap(char* str)
+{
+	assert(str);
+	int len = strlen(str);
+	char* left = str;
+	char* right = str + len - 1;
+	while (left < right)
+	{
+		char tem = *left;
+		*left = *right;
+		*right = tem;
+		left++;
+		right--;
+
+	}
+}
+int main()
+{
+	char arr[256];
+	printf("请输入一个字符串：\n");
+	//scanf("%s", &arr);
+	gets(arr);
+	swap(arr);
+	printf("逆序后的字符串为：%s\n", arr);
+	return 0;
+}
