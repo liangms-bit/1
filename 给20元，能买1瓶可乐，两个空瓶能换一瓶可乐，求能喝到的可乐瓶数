@@ -1,0 +1,16 @@
+#inclede<stdio.h>
+int main()
+{
+	int money;
+	scanf("%d", &money);
+
+	int tol=money;
+	int empty=money;
+	while (empty >= 2)
+	{
+		tol += empty/2;
+		empty = empty / 2 + empty % 2;
+	}
+	printf("%d", tol);
+	return 0;
+}
