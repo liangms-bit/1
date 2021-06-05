@@ -1,0 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+
+void found1(char* arr,int k)
+{
+	assert(arr!=NULL);
+	int i = 0;
+	int len = strlen(arr);
+	assert(k<len);
+	for (i = 0; i <= k; i++)
+	{
+		char tem = *arr;
+		int j = 0;
+		for (j = 0; j < len - 1; j++)
+		{
+			arr[j] = arr[j + 1];
+		}
+		arr[len - 1] = tem;
+	}
+}
+
+//int main()//将abcdef字符串左旋两位得到cdefab
+//{
+//	char arr[] = "abcdef";
+//
+//	found(arr, 6);
+//
+//	printf("%s\n", arr);
+//
+//
+//	return 0;
+//}
+
+int  found2(char* a, char* b)
+{
+	int i = 0;
+	int len = strlen(a);
+	assert(b!= NULL);
+	for (i = 0; i < len ; i++)
+	{
+		found1(a, 1);
+	int ret=strcmp(a, b);
+	if (ret == 0)
+		return 1;
+	}
+	return 0;
+
+}
+
+int main()////判断cdefab是否是abcdef的左旋值;
+{
+	char a[] = "abcdef";
+	char b[] = "cdefba";
+
+	int ret=found2(a, b);
+	if (ret == 1)
+		printf("YES\n");
+	else
+		printf("NO\n");
+	return 0;
+}
