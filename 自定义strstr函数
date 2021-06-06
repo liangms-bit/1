@@ -1,0 +1,48 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+
+char* my_strstr(const char* s1, const char* s2)
+{
+	assert(s1 && s2);
+	char* cp =NULL;
+	char* dp = NULL;
+	char* jp = (char* )s1;
+	while (*jp != '0')
+	{
+		cp = jp;
+		dp = (char* )s2;
+		while (*cp != '\0' && *dp != '\0' && (*cp == *dp))
+		{
+			cp++;
+			dp++;
+		}
+		if (*cp == '\0')
+		{
+			return NULL;
+		}
+		if (*dp == '\0')
+		{
+			return jp;
+		}
+			jp++;
+	}
+	return NULL;
+}
+int main()
+{
+	char* p1 = "abcdefabc";
+	char* p2 = "defa";
+	char* ret = my_strstr(p1,p2);
+	if (ret != NULL)
+	{
+		printf("yes\n");
+		printf("%s\n", ret);
+	}
+	else
+	{
+		printf("NO\n");
+	}
+	return 0;
+}
