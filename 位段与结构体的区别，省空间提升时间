@@ -1,0 +1,34 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+struct STU
+{
+	int a ;
+	int b;
+	int c;
+	int d;
+
+};
+struct STU1
+{
+	int _a : 2;
+	int _b : 5;
+	int _c : 7;
+	int _d : 4;
+};
+struct STU2
+{
+	char _a : 2;
+	char _b : 5;
+	char  _c : 7;
+	char  _d : 4;
+};
+int main()//初始位段，相比结构体而言节约空间
+{
+	struct STU s = { 0 };
+	struct STU1 s1 = { 0 };
+	struct STU2 s2 = { 0 };
+	printf("%d\n", sizeof(s));
+	printf("%d\n", sizeof(s1));
+	printf("%d\n", sizeof(s2));
+	return 0;
+}
