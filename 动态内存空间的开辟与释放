@@ -1,0 +1,25 @@
+#include<stdio.h>
+
+int main()
+{
+int* p=(int *)malloc(10*sizeof(int))
+if(p==NULL)
+{
+printf("%s\n",strerror(erron));//内存开辟失败时，打印错误信息
+}
+else
+{
+int i=10;
+for(i=0;i<10;i++)
+{
+*(p+i)=i*2;
+}
+for(i=0;i<10;i++)
+{
+printf("%d ",*(p+i));
+}
+free(p);
+p=NULL;
+}
+return 0;
+}
