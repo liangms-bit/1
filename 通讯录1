@@ -1,0 +1,122 @@
+
+#include<stdio.h>
+#include<string.h>
+
+#define Max 100
+#define Name 20
+#define Sex 5
+#define Tel 12
+#define Addr 20
+
+struct LIST
+{
+	char name[Name];
+	int age;
+	char sex[Sex];
+	char tel[Tel];
+	char addr[Addr];
+};
+
+struct CON
+{
+	struct LIST date[Max];
+	int size;
+};
+void initialise(struct CON* p);
+void add(struct CON* p);
+void show(const struct CON* p);
+
+void menu()
+{
+	printf("***************************\n");
+	printf("******* 您的通讯录 ********\n");
+	printf("*****1.add     2.serch*****\n");
+	printf("*****3.delete  4.operate***\n");
+	printf("*****5.show    0.exit******\n");
+	printf("***************************\n");
+}
+void initialise(struct CON *p)
+{
+	memset(p->date, 0, sizeof(p->date));
+	p->size = 0;
+}
+void add(struct CON* p)
+{
+	if (p->size == Max)
+	{
+		printf("内存不足，请删除部分通讯后重新添加\n");
+	}
+	else
+	{
+		printf("请输入对方姓名->\n");
+		scanf("%s", p->date[p->size].name);
+		printf("请输入对方年龄->\n");
+		scanf("%d", &(p->date[p->size].age));
+		printf("请输入对方性别->\n");
+		scanf("%s", p->date[p->size].sex);
+		printf("请输入对方电话->\n");
+		scanf("%s", p->date[p->size].tel);
+		printf("请输入对方地址->\n");
+		scanf("%s",p->date[p->size].addr);
+	}
+	p->size++;
+	printf("添加成功！\n");
+
+}
+void show(const struct CON* p)
+{
+	if (p->size ==0)
+	{
+		printf("当前通讯录为空\n");
+	}
+	else
+	{
+		int i = 0;
+		printf("%-20s\t%-5s\t%-5s\t%-12s\t%-20s\n","姓名","年龄","性别","电话","地址");
+		for (i = 0; i < p->size; i++)
+		{
+			
+			printf("%-20s\t%-5d\t%-5s\t%-12s\t%-20s\n",
+				p->date[i].name,
+				p->date[i].age,
+				p->date[i].sex,
+			    p->date[i].tel,
+				p->date[i].addr);
+		}
+	}
+}
+
+int main()
+{
+	int i=0;
+	struct CON con;
+	initialise(&con);
+	do
+	{
+		menu();
+		printf("请输入您要执行的操作\n");
+		scanf("%d", &i);
+		switch (i)
+		{
+		case 1:
+			add(&con);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			show(&con);
+			break;
+		case 0:
+			printf("您已选择退出！\n");
+			break;
+		default:
+			printf("输入错误，请重新输入！\n");
+			break;
+		}
+	} while (i);
+	return 0;
+}
