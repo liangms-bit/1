@@ -1,0 +1,25 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+void getp(char* *s)
+{
+	*s = (char*)malloc(100);
+}
+
+void test(void)
+{
+	char* p = NULL;
+	getp(&p);
+	strcpy(p, "bit");
+	printf(p);
+
+	free(p);
+	p = NULL;
+}
+int main()
+{
+	test();
+	return 0;
+}
