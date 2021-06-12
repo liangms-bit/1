@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+struct STR
+{
+	int i;
+	int* arr;
+};
+int main()
+{
+	struct STR *p = (struct STR*)malloc(sizeof(*p));
+	if (p != NULL)
+	{
+	int i = 0;
+		p->arr = (int*)malloc(5 * sizeof(int));
+		for (i = 0; i < 5; i++)
+		{
+			p->arr[i] = i;
+		}
+		for (i = 0; i < 5; i++)
+		{
+			printf("%d  ",p->arr[i]);
+		}
+		free(p->arr);
+		p->arr = NULL;
+		free(p);
+		p = NULL;
+	}
+	return 0;
+}
