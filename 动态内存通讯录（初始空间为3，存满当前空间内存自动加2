@@ -1,0 +1,272 @@
+#pragma once
+#include<stdio.h>////头文件+函数声明
+#include<string.h>
+#include<stdlib.h>
+
+#define RON 3
+#define Name 20
+#define Sex 5
+#define Tel 12
+#define Addr 20
+struct LIST
+{
+	char name[Name];
+	int age;
+	char sex[Sex];
+	char tel[Tel];
+	char addr[Addr];
+};
+struct CON
+{
+	struct LIST* date;
+	int size;
+	int ron;
+};
+enum OPTION
+{
+	EXIT,
+	ADD,
+	DEL,
+	SERCH,
+	OPERATE,
+	SHOW,
+	SORT
+};
+void initialise(struct CON* p);
+void add(struct CON* p);
+void show(const struct CON* p);
+void delete(struct CON* p);
+void serch(struct CON* p);
+void operate(struct CON* p);
+void sort(struct CON* p);
+void destroy(struct CON* p);
+
+
+#define _CRT_SECURE_NO_WARNINGS////函数定义
+#include"head.h"
+void initialise(struct CON* p)//初始化
+{
+	p->date = (struct LIST* )malloc(RON * sizeof(struct LIST));
+	if (p == NULL)
+	{
+		return;
+	}
+	p->size = 0;
+	p->ron = RON;
+}
+void check(struct CON* p)
+{
+	if (p->size == p->ron)
+	{
+		struct LIST* ps = (struct LIST*)realloc(p->date, (p->ron + 2) * sizeof(struct LIST));
+			if (ps != NULL)
+			{
+				p->date= ps;
+				p->ron += 2;
+				printf("增容成功！\n");
+			}
+			else
+			{
+				printf("增容失败！\n");
+			}
+	}
+	return;
+}
+void add(struct CON* p)//添加
+{
+	    check(p);
+		printf("请输入对方姓名->\n");
+		scanf("%s", p->date[p->size].name);
+		printf("请输入对方年龄->\n");
+		scanf("%d", &(p->date[p->size].age));
+		printf("请输入对方性别->\n");
+		scanf("%s", p->date[p->size].sex);
+		printf("请输入对方电话->\n");
+		scanf("%s", p->date[p->size].tel);
+		printf("请输入对方地址->\n");
+		scanf("%s", p->date[p->size].addr);
+	
+	p->size++;
+	printf("添加成功！\n");
+}
+void show(const struct CON* p)//打印
+{
+	if (p->size == 0)
+	{
+		printf("当前通讯录为空\n");
+	}
+	else
+	{
+		int i = 0;
+		printf("%-20s\t%-5s\t%-5s\t%-12s\t%-20s\n", "姓名", "年龄", "性别", "电话", "地址");
+		for (i = 0; i < p->size; i++)
+		{
+
+			printf("%-20s\t%-5d\t%-5s\t%-12s\t%-20s\n",
+				p->date[i].name,
+				p->date[i].age,
+				p->date[i].sex,
+				p->date[i].tel,
+				p->date[i].addr);
+		}
+	}
+}
+static int Find(struct CON* p, char name[Name])//首层查找
+{
+	int i = 0;
+	for (i = 0; i < p->size; i++)
+	{
+		if (0 == strcmp(p->date[i].name, name))
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+void serch(struct CON* p)//查找
+{
+	char name[Name] = { 0 };
+	printf("请输入要查找的人的姓名\n");
+	scanf("%s", name);
+	int ret = Find(p, name);
+	if (ret == -1)
+	{
+		printf("要查找的人的不存在！\n");
+	}
+	else
+	{
+		printf("%-20s\t%-5s\t%-5s\t%-12s\t%-20s\n", "姓名", "年龄", "性别", "电话", "地址");
+		printf("%-20s\t%-5d\t%-5s\t%-12s\t%-20s\n",
+			p->date[ret].name,
+			p->date[ret].age,
+			p->date[ret].sex,
+			p->date[ret].tel,
+			p->date[ret].addr);
+	}
+
+}
+void delete(struct CON* p)//删除
+{
+	char name[Name] = { 0 };
+	printf("请输入要删除的人的姓名\n");
+	scanf("%s", name);
+	int ret = Find(p, name);
+	if (ret == -1)
+	{
+		printf("要删除的人的不存在！\n");
+	}
+	else
+	{
+		int j = 0;
+		for (j = ret; j < p->size - 1; j++)
+		{
+			p->date[j] = p->date[j + 1];
+		}
+		p->size--;
+		printf("删除成功！\n");
+	}
+}
+void operate(struct CON* p)//修改
+{
+	char name[Name] = { 0 };
+	printf("请输入要修改的人的姓名\n");
+	scanf("%s", name);
+	int ret = Find(p, name);
+	if (ret == -1)
+	{
+		printf("要修改的人的不存在！\n");
+	}
+	else
+	{
+		printf("请输入对方姓名->\n");
+		scanf("%s", p->date[ret].name);
+		printf("请输入对方年龄->\n");
+		scanf("%d", &(p->date[ret].age));
+		printf("请输入对方性别->\n");
+		scanf("%s", p->date[ret].sex);
+		printf("请输入对方电话->\n");
+		scanf("%s", p->date[ret].tel);
+		printf("请输入对方地址->\n");
+		scanf("%s", p->date[ret].addr);
+	}
+	printf("修改成功\n");
+}
+
+void sort(struct CON* p)//排序
+{
+	int i = 0;
+	for (i = 0; i < p->size - 1; i++)
+	{
+		int j = 0;
+		for (j = 0; j < p->size - 1 - i; j++)
+		{
+			if (p->date[j].age > p->date[j + 1].age)
+			{
+				struct LIST tem = p->date[j];
+				p->date[j] = p->date[j + 1];
+				p->date[j + 1] = tem;
+			}
+		}
+	}
+	printf("排序成功！\n");
+}
+void destroy(struct CON* p)
+{
+	free(p->date);
+	p->date = NULL;
+}
+
+#define _CRT_SECURE_NO_WARNINGS/////主函数
+#include"head.h"
+
+void menu()
+{
+	printf("***************************\n");
+	printf("******* 您的通讯录 ********\n");
+	printf("*****1.add     2.delete *****\n");
+	printf("*****3.serch  4.operate***\n");
+	printf("*****5.show    6.sort******\n");
+	printf("*****0.exit ***************\n");
+}
+
+int main()
+{
+	int i = 0;
+	struct CON con;
+	initialise(&con);
+	do
+	{
+		menu();
+		printf("请输入您要执行的操作\n");
+		scanf("%d", &i);
+		switch (i)
+		{
+		case ADD://增加
+			add(&con);
+			break;
+		case DEL://删除
+			delete(&con);
+			break;
+		case SERCH://查找
+			serch(&con);
+			break;
+		case OPERATE://修改
+			operate(&con);
+			break;
+		case SHOW://打印
+			show(&con);
+			break;
+		case SORT://分类
+			sort(&con);
+			break;
+		case EXIT://退出
+			destroy(&con);
+			printf("您已选择退出！\n");
+			break;
+		default:
+			printf("输入错误，请重新输入！\n");
+			break;
+		}
+	} while (i);
+	return 0;
+}
