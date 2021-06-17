@@ -1,0 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+struct S
+{
+	char c1;
+	int a;
+	char c2;
+};
+#define OFFSET(struct_name,member_name)  (int)&(((struct S*)0)->member_name)
+int main()
+{
+	printf("%d\n", OFFSET(struct S, c1));
+	printf("%d\n", OFFSET(struct S, a));
+	printf("%d\n", OFFSET(struct S, c2));
+	return 0;
+}
