@@ -1,0 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+//#define MAX(a,b) a>b?a:b
+
+int main()
+{
+	int a, b, c, x;
+	scanf("%d %d %d", &a, &b, &c);
+	//x==MAX(a, b);
+	//if (x == a)
+	//	printf("a>b\n");
+	//else
+	//	printf("a<b\n");
+	//x=MAX(a, c);
+	//if (x == a)
+	//	printf("a>c\n");
+	//else
+	//	printf("a<c\n");
+	//x=MAX(b, c);
+	//if (x == b)
+	//	printf("b>c\n");
+	//else
+	//	printf("b<c\n");
+	if (a > b)
+	{
+		x = a;
+		a = b;
+		b = x;
+	}
+	if (a > c)
+	{
+		x = a;
+		a = c;
+		c = x;
+	}
+	if (b > c)
+	{
+		x = c;
+		c = b;
+		b = x;
+	}
+	printf("大小顺序为：%d %d %d ", a, b, c);
+	return 0;
+}
