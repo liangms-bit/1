@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+void compare(int* a,int* b)
+{
+	int tem;
+	int i = 0;
+	
+		if (*a > *b)
+		{
+			tem = *a;
+			*a = *b;
+			*b = tem;
+		}
+	
+}
+int main()
+{
+	int a[5] = { 1,5,4,2,3 };
+	int i = 9;
+	int d = 5 / 2 + 1;
+	int j = 0;
+	//for (i = 0; i < 4; i++)
+	//{
+	//	for (j = 0; j <4-i; j++)
+	//	{
+	//		compare(&a[j], &a[j + 1]);
+	//	}
+	//}
+	 //选择排序法
+// { 1,5,4,2,3 }
+	for (int i = 0; i < 4; i++)
+  {
+		int min = a[i];
+		int minIndex = i;
+		for (int j = i + 1; j < 5; j++) 
+    {
+			if (a[j] < min) 
+          {
+				min = a[j];
+				minIndex = j;
+  	}
+	  }
+		a[minIndex] = a[i];
+		a[i] = min;
+	}
+
+	for (i = 0; i < 5; i++)
+	{
+		printf("%-5d", a[i]);
+	}
+	return 0;
+}
