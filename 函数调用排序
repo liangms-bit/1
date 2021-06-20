@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+void compare(int* a,int* b)
+{
+	int tem;
+	int i = 0;
+	
+		if (*a > *b)
+		{
+			tem = *a;
+			*a = *b;
+			*b = tem;
+		}
+	
+}
+int main()
+{
+	int a[5] = { 22,11,44,33,55 };
+	int i = 0;
+	for (i = 0; i < 4; i++)
+	{
+		compare(&a[i], &a[i+1]);
+	}
+	for (i = 0; i < 5; i++)
+	{
+		printf("%-5d", a[i]);
+	}
+	return 0;
+}
