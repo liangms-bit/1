@@ -1,0 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+
+int main()//插入排序
+{
+	int a[5] = { 5,4,3,2,1 };
+	int i, j;
+	for (i = 0; i < 4; i++)//for (i = 1; i < 5 i++)
+	{                          //{
+		int t = a[i + 1];      //int t=a[i]
+		for (j = i + 1; j > 0; j--)//for (j = i ; j >= 0; j--)
+		{                          //{
+			if (a[j-1] > a[j])     //if (a[j-1] > a[j])
+			{                      //{
+				a[j] = a[j-1];    //       a[j]=a[j-1];
+				a[j - 1] = t;      //      a[j-1]=t;
+			}                     //}
+		}                         //}
+	}                              //}
+	for (i = 0; i < 5; i++)
+	{
+		printf("%d ", a[i]);
+	}
+	return 0;
+}
