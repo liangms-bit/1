@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+int sercher(int arr[], int i,int e)
+{
+	int j = 0;
+	while (j<i)
+	{
+		if (arr[j] == arr[i - 1])
+		{
+			return arr[j];
+		}
+		j++;
+		if (j >= e)
+			return -1;
+	}
+}
+int main()//查找数组中的第i个元素并输出
+{
+	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+	int e=sizeof(arr)/sizeof(arr[0]);
+	int k=sercher(arr, 5,e);
+	if (k == -1)
+	{
+		printf("超出查找范围\n");
+	}
+	else
+		printf("%d\n", k);
+	return 0;
+}
