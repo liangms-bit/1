@@ -1,0 +1,41 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<iostream>
+using namespace std;
+//
+//typedef struct Lnode
+//{
+//	int date;
+//	struct Lnode* next;
+//}Lnode,*Linklist;
+//Linklist L;
+//Lnode *p;
+//int serch(Linklist L, int i, int &e)
+//{
+//	p = L->next;
+//		int j = 1;
+//		if (!p || j > i)
+//		{
+//			return -1;
+//		}
+//		while (p && j < i)
+//		{
+//			p = p->next;
+//			j++;
+//		}
+//	
+//		e = p->date;
+//		return 0;
+//}
+int main(void)
+{
+	int sum=0;
+	int i = 1;
+	int n = 100;
+	for (i = 1; i <= n; i++)
+	{
+		sum += i;
+	}
+	printf("sum=%d\n", sum);
+	return 0;
+}
