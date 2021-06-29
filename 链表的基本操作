@@ -1,0 +1,113 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+
+
+typedef struct Lnode//定义链表
+{
+	Elemtype date;
+	struct Lnode* next;
+}Lnode,*Linklist;
+
+status Initlist(Linklist &L)//初始化链表
+{
+	L = new Lnode;
+	L->next = NULL;
+}
+status Destory(Linklist& L)//销毁链表  
+{
+	p = new Lnode;
+	while (L)
+	{
+		p = L;
+		L= L->next;
+		delete p;
+	}
+}
+
+status Insert(Linklist& L, int i, Elemtype e)//在链表第i位置插入 
+{
+	Lnode *p,*s;
+	p = new Lnode;
+	p = L;
+	int j = 0;
+	while (p && j < i - 1)
+	{
+		p=p -> next;
+		j++;
+	}
+	if (!p || j > i)
+		return -1;
+	s = new Lnode;
+	s->date=e;
+	s->next = p->next;
+	p ->next = s;
+	return 0;
+}
+
+status Delete(Linklist& L, int i,Elemtype &e) //删除链表第i位置元素
+{
+	Lnode* p, * s;
+	p = new Lnode;
+	p = L;
+	int j = 0;
+	for (j = 0; j < i; j++)
+	{
+		p = p->next;
+		j++;
+	}
+	if (!p || j > i)
+		return -1;
+	s = p->next;
+	e = s->date;
+	p -> next = s->next;
+	delete s;
+	return 0;
+}
+ 
+void Creatlist0(Linklist& L, int n)//创建单链表
+{
+	Lnode* p;
+	L = new Lnode;
+	L->next = NULL;
+	for (int i = 0; i < n; i--)
+	{
+		p = new Lnode;
+		cin >> p->date;
+		p->next = L->next;
+		L -> next = p;
+	}
+}
+void Creatlist1(Linklist &L,int n) //尾插法创建单链表
+{
+	L = new Lnode;
+	L->next = NULL;
+	r = L;
+	for (int i = 0; i < n; i++)
+	{
+		p = new lnode;
+		cin >> p->date;
+		p->next = NULL;
+		r->next = p;
+		r = p;
+	}
+}
+
+void Creatlist2(Linklist &L, int n)//头插法创建单链表
+{
+	L = new Lnode;
+	L->next = NULL;
+	for (int i = n; i >0; i--)
+	{
+		p = new lnode;
+		cin >> p->date;
+	 p->next = L->next;
+		L->next = p;
+	}
+}
+
+int main()
+{
+	
+	return 0;
+}
