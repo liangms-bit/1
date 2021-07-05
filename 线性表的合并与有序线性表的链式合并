@@ -1,0 +1,70 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+
+
+void found1(qlist La, qlist Lb)//线性表的合并
+{
+	la_len = length(La);
+	lb_len = length(Lb);
+	for (int i = 1; i <= lb_len; i++)
+		getlist(Lb,i, e);
+	if (!(localist(La, e)))
+
+		insert(&La, la_len++; e);
+}
+
+void found2(qlist La, qlist Lb, qlist& Lc)//有序线性表的合并
+{
+	pa = La.elem;
+	pb = Lb.elem;
+	lc_len = length(La) + length(Lb);
+	Lc = new Elemtype(la_len);
+	pc = Lc.elem;
+	pa_last = La.elem + length(La) - 1;
+	pb_last = Lb.elem + length(Lb) - 1;
+	while (pa <= pa_last && pb <= pb_last)
+	{
+		if (*pa <= *pa)
+			*pc++ = *pa++;
+		else
+			*pc++ = *pa++;
+	}
+	while (pa<=pa_last)
+	{
+		*pc++ = *pa++;
+	}
+
+	while (pb<=pb_last)
+	{
+		*pc++ = *pb++;
+    }
+}
+
+void found3(linklist &La, linklist &Lb, linklist &Lc)//有序线性表的链式合并
+{
+	pa = La->next;
+	pb = Lb->next;
+	pc = Lc = La;
+	while (pa && pb)
+	{
+		if (pa->date <= pb->date)
+		{
+			pc->next = pa;
+			pc = pa;
+			pa = pa->next;
+		}
+		else
+		{
+			pc->next = pb;
+			pc = pb;
+			pb = pb->next;
+		}
+	}
+	pc->next = pa ? pa : pb;
+}
+int main()
+{
+
+	return 0;
+}
