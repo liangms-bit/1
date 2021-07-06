@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+typedef struct Ponde//定义多项式节点
+{
+	float c;
+	int ex;
+	struct Ponde* next;
+}Pnode;
+void creatpolyn(polyn &P, int n)//创建多项式
+{
+	P = new Ponde;
+	P->next = NULL;
+	for (int i = 0; i < n; ++i)
+		s = new Ponde;
+	cin >> s->c >> s->ex;
+	    pre = P;
+		q = P->next;
+		if (q && q->ex < s->ex)//找到链表中第一个小于要插入数据s的位置
+		{
+			pre=q;
+			q = q->next;
+		}
+		//在pre和q之间插入s
+		s->next=q;//q的后继是s
+		pre->next = s;//pre是s的前驱节点
+}
+int main()
+{
+	cout<<"hello world"<<endl;
+	return 0;
+}
