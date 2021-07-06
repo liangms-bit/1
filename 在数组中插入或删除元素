@@ -1,0 +1,50 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+
+int main()
+{
+
+	//int a[10] = { 1,2,3,4,5,6,7,8,9,10};//在数组a的里插入一个元素
+	//int b[11] = {0};
+	//int i = 0;
+	//int c = 5;//插入的位置
+	//int e = 6;//插入的值
+	//for (i = 0; i < 11; i++)
+	//{
+	//	if (i < c)
+	//	{
+	//		b[i] = a[i];
+	//	}
+	//	else if (i == c)
+	//	{
+	//		b[i] = e;
+	//	}
+	//	else
+	//		b[i] = a[i - 1];
+	//}
+	//for (i = 0; i < 11; i++)
+	//{
+	//	printf("%d  ", b[i]);
+	//}
+	//
+	//cout<< endl<<sizeof(a);
+		int a[10] = { 1,2,3,4,5,6,7,8,9,10};//在数组a的里删除一个元素
+	int b[9] = {0};
+	int i = 0;
+	int c = 5;//插入的位置
+	for (i = 0; i < 9; i++)
+	{
+		if (i < c-1)
+		{
+			b[i] = a[i];
+		}
+		else
+			b[i] = a[i+1];
+	}
+	for (i = 0; i < 9; i++)
+	{
+		printf("%d  ", b[i]);
+	}
+	return 0;
+}
