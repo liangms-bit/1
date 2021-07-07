@@ -1,0 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include"stdio.h"
+#include<string.h>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	char b[100];
+	gets_s(b);
+	char a = getchar();
+
+	puts(b);
+	putchar(a);
+	return 0;
+}
