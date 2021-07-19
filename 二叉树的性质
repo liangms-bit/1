@@ -1,0 +1,102 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+
+
+typedef struct Tree
+{
+	int date;
+	struct Tree *r, *l;
+}Tree,*BiTree;
+
+//status Protree(BiTree T)
+//{
+//	BiTree p;
+//	InitStack(S);//初始化一个栈
+//	p = T;
+//	while (p || !Emptystack(s))
+//	{
+//		if (p)
+//		{
+//			push(S, p);
+//			p = p->l;
+//		}
+//		else
+//			Pop(S, q);
+//		p = q->r;
+//	}
+//}
+status CreatBitree(Bitree& T)//创建二叉树链表
+{
+	scanf(&ch);//cin>>ch;
+	if (ch == "#") 
+		T = NULL;
+	if (!(T = (Bitree*)malloc(sizeof(T))
+		return error;
+	else
+	{
+		T->date = ch;
+		Creattree(T->lchild);
+		Creattree(T->rchild);
+	}
+	return OK;
+}
+
+int Copy(Bitree T, Bitree& Newt)//复制二叉树
+{
+	if (T == NULL)
+	{
+		Newt = NULL;
+		return 0;
+	}
+	else
+	{
+		Newt = new BiTnode;
+		Newt->date = T->date;
+		Copy(T->lchild, Newt->lchild);
+		Copy(T->rchild, Newt->rchild);
+	}
+}
+
+int Depth(Bitree T)//求二叉树的深度
+{
+	if (T == NULL)
+		return 0;
+	else
+	{
+		m = Depth(T->lchild);
+		n = Detpth(T->rchild);
+		if (m > n)
+			return m + 1;
+		else
+			return n + 1;
+	}
+
+}
+
+int Count（Bitree T)//计算二叉树所有节点的个数
+	{
+		if (T == NULL)
+			return 0;
+		else
+		{
+			m = Count(T->lchild);
+			n = Count(T->rchild);
+			return m + n + 1;
+		}
+	}
+
+int lead(Bitree T)//统计二叉树中叶子节点上个数
+{
+	if (T == NULL)
+		return 0;
+	if ((T->lchild == NULL) && (T->rchild == NULL))
+		return 1;
+	else
+		return lead(T->lchild) + lead(T->rchild);
+}
+int  main()
+{
+	
+	return 0;
+}
