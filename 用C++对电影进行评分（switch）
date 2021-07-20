@@ -1,0 +1,39 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+using namespace std;
+
+int  main()
+{
+	int a;
+	cout << "请输入您对影片的评分：";
+	cin >> a;
+	if (9 < a&&a <= 10)
+	{
+		a = 1;
+	}
+	else if (8 < a&& a<= 9)
+	{
+		a = 2;
+	}
+	else if (7 < a&&a<= 8)
+	{
+		a = 3;
+	}
+	else if (6 <= a &&a<= 7)
+	{
+		a = 4;
+	}
+	else
+		a = 5;
+	switch (a)
+	{
+	case 1:cout << "优秀"<<endl; break;
+	case 2:cout << "良好"<<endl; break;
+	case 3:cout << "一般"<<endl; break;
+	case 4:cout << "差片" << endl; break;
+	case 5:cout << "烂片"; break;
+	default:cout << "输入错误\n"; break;
+  }
+	return 0;
+}
