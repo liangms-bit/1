@@ -1,0 +1,74 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+#include<ctime>
+using namespace std;
+
+struct Student
+{
+	string name;
+	int age;
+	int score;
+};
+
+struct Teacher
+{
+	string name;
+	struct Student S[5];
+};
+void initial(struct Teacher T[], int len)
+{
+	string arr = "ABCDE";
+	for (int i = 0; i < len; i++)
+	{
+		T[i].name = "Teacher_";
+		T[i].name += arr[i];
+		for (int j = 0; j < 5; j++)
+		{
+			T[i].S[j].name = arr[j];
+			T[i].S[j].age = j + 20;
+			T[i].S[j].score = rand() % 61+40;
+		}
+	}
+}
+void print(struct Teacher T[], int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		cout << "老师："<<T[i].name << endl;
+		for (int j = 0; j < 5; j++)
+		{
+			cout << "\t学生：" << T[i].S[j].name
+				<< "\t年龄：" << T[i].S[j].age
+				<< "\t分数：" << T[i].S[j].score << endl;
+		}
+	}
+}
+void buber(struct Teacher T[], int len)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			for (int k = 0; k < 4 - j;k++)
+			{
+				if (T[i].S[k].score < T[i].S[k + 1].score)
+				{
+					struct Student temp = T[i].S[k];
+					T[i].S[k] = T[i].S[k + 1];
+					T[i].S[k + 1] = temp;
+				}
+			}
+		}
+	}
+
+}
+int main()
+{
+	srand((unsigned int)time(NULL));
+	struct Teacher T[3];
+	initial(T, 3);
+	buber(T, 3);
+	print(T, 3);
+	return 0;
+}
