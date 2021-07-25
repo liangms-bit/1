@@ -1,0 +1,77 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+
+class Person
+{
+public:
+	Person()
+	{
+		cout << "无参构造函数正在被调用" << endl;
+	}
+	Person(int a,int hi)
+	{
+		age = a;
+		h = new int(hi);
+		cout << "有参构造函数正在被调用" << endl;
+	}
+	Person(const Person &p)
+	{
+		age = p.age;
+	h =new int(*p.h);
+	
+		cout << "拷贝构造函数正在被调用" << endl;
+	}
+	~Person()
+	{
+		if (h != NULL)
+		{
+			delete h;
+			h = NULL;
+		}
+		cout << "析构函数正在被调用" << endl;
+	}
+		int age;
+		int* h;
+};
+//void test()
+//{
+//	
+//	Person p2(10);
+//	Person p3(p2);
+//	cout << "p3的年龄为：" << p3.age << endl;
+//}
+//void dowork(Person p)
+//{
+//
+//}
+//Person dowork2()
+//{
+//
+//	Person p1;
+//	cout << (int*)&p1 << endl;
+//	return p1;
+//}
+//void test02()
+//{
+//	Person p;
+//	dowork(p);
+//}
+//void test03()
+//{
+//	Person p2=dowork2();
+//	cout << (int*)&p2 << endl;
+//}
+void test03()
+{
+	Person p1(18,160);
+	cout << "年龄：" << p1.age << "\t性别：" << *p1.h << endl;
+	Person p2(p1);
+	cout << "年龄：" << p2.age << "\t性别：" << *p2.h << endl;
+}
+int main()
+{
+	test03();
+
+	return 0;
+}
