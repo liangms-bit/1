@@ -1,0 +1,100 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+
+using namespace std;
+//点类声明
+class Point  
+{
+public:
+	void setX(int a);
+	void setY(int b);
+	int getX();
+	int getY();
+private:
+	int x;
+	int y;
+};
+//点类定义
+	void  Point::setX(int a)
+	{
+		x = a;
+	}
+	void  Point::setY(int b)
+	{
+		y = b;
+	}
+	int  Point::getX()
+	{
+		return x;
+	}
+	int  Point::getY()
+	{
+		return y;
+	}
+  //圆类声明
+  class Circle
+{
+public:
+	void setR(int b);
+	int getR();
+	void setCP(Point v);
+	Point getCP();
+	void iscir(Circle& c1, Point& p);
+private:
+	int r;
+	Point c;
+};
+//圆类定义
+	void  Circle::setR(int b)
+	{
+		r = b;
+	}
+	int  Circle::getR()
+	{
+		return r;
+	}
+	void  Circle::setCP(Point v)
+	{
+		c = v;
+	}
+	Point  Circle::getCP()
+	{
+		return c;
+	}
+  //判断点与圆的位置关系
+	void  Circle::iscir(Circle& c1, Point& p)
+	{
+		if (((c1.getCP().getX() - p.getX()) * (c1.getCP().getX() - p.getX()) +
+			(c1.getCP().getY() - p.getY()) * (c1.getCP().getY() - p.getY()))
+			== c1.getR() * c1.getR())
+		{
+			cout << "点在圆上" << endl;
+		}
+		else if (((c1.getCP().getX() - p.getX()) * (c1.getCP().getX() - p.getX()) +
+			(c1.getCP().getY() - p.getY()) * (c1.getCP().getY() - p.getY())) > c1.getR() * c1.getR())
+		{
+			cout << "点在圆外" << endl;
+		}
+		else
+		{
+			cout << "点在圆内" << endl;
+		}
+	}
+  //主函数
+  int main()
+{
+	//创建圆
+	Circle c;
+	c.setR(10);
+	Point cp;
+	cp.setX(0);
+	cp.setY(0);
+	c.setCP(cp);
+	//创建点
+	Point p;
+	p.setX(10);
+	p.setY(10);
+	c.iscir(c,p);
+	system("pause");
+	return 0;
+}
