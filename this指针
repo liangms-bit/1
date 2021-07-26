@@ -1,0 +1,69 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+
+//class Person
+//{
+//public:
+//	static void func()
+//	{
+//		A = 100;
+//		cout << "静态成员函数被调用" <<A<< endl;
+//	}
+//	static int A;
+//
+//};
+//int Person::A = 0;
+//void test()
+//{
+//	Person p;
+//	p.func();
+//	Person::func();
+//}
+//class Person
+//{
+//public:
+//	int A;
+//	static int B;
+//
+//	void func()
+//	{
+//		int C=10;
+//	}
+//	static void func2()
+//	{
+//		int D = 5;
+//	}
+//};
+//int Person::B = 0;
+//void test()
+//{
+//	Person p;
+//	cout << "字节大小" << sizeof(p) << endl;
+//}
+class Person
+{
+public:
+	Person(int age)
+	{
+		this->age = age;
+	}
+	Person &add(Person& p)
+	{
+		age += p.age;
+		return *this;
+	}
+	int age;
+};
+void test()
+{
+	Person p1(10);
+	Person p2(20);
+	p2.add(p1).add(p1).add(p1);
+	cout << p2.age << endl;
+}
+int main()
+{
+	test();
+	return 0;
+}
