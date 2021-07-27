@@ -1,0 +1,76 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+using namespace std;
+
+//class Person
+//{
+//	friend ostream& operator<<(ostream & cout, Person & p);
+//public:
+//Person(int a, int b);
+//private:
+//	int m_a;
+//	int m_b;
+//};
+//Person::Person(int a, int b)
+//{
+//	m_a = a;
+//	m_b = b;
+//}
+//ostream& operator<<(ostream &cout, Person &p)
+//{
+//	cout << "m_a=" << p.m_a << "\tm_b" << p.m_b << endl;
+//	return cout;
+//	
+//}
+//void test()
+//{
+//	Person p(10,20);
+//	cout << p << "hello" << endl;
+//}
+
+
+class Bulding
+{
+	friend void Goodgay::visit();
+public:
+	Bulding()
+	{
+		m_room = "正在访问客厅";
+		b_room = "正在访问卧室";
+	}
+	
+	string m_room;
+private:
+
+	string b_room;
+};
+class Goodgay
+{
+public:
+	Goodgay();
+	void visit();
+
+	Bulding* bulding;
+};
+ Goodgay::Goodgay()
+{
+	bulding = new Bulding;
+}
+void Goodgay::visit()
+{
+	cout << bulding->m_room << endl;
+	cout << bulding->b_room << endl;
+}
+void test()
+{
+	Goodgay b;
+	b.visit();
+}
+
+int main()
+{
+	test();
+
+	return 0;
+}
