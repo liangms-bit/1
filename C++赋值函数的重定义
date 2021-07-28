@@ -1,0 +1,48 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Myint
+{
+	
+public:
+	Myint(int a)
+	{
+		m_a = new int(a);
+	}
+
+	Myint& operator=(Myint &a)
+	{
+		m_a = new int(*a.m_a);
+		return *this;
+	}
+
+	~Myint()
+	{
+		if (m_a != NULL)
+		{
+			delete m_a;
+			m_a = NULL;
+		}
+	}
+
+	int *m_a;
+};
+void test()
+{
+	Myint p1(10);
+
+	Myint p2(20);
+	cout << *p1.m_a << endl;
+
+	p2 = p1;
+	cout << *p2.m_a << endl;
+}
+
+int main()
+{
+	test();
+
+	return 0;
+}
