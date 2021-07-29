@@ -1,0 +1,102 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+
+using namespace std;
+//普通计算器程序
+class Calculate//基类
+{
+public:
+	int get(string oper)//算法
+	{
+		if (oper == "+")//加法运算
+		{
+			return m_a + m_b;
+		}
+		else if (oper == "-")//减法运算
+		{
+			return m_a - m_b;
+		}
+		else if (oper == "*")//乘法运算
+		{
+			return m_a * m_b;
+		}
+		return 0;
+	}
+	int m_a;
+	int m_b;
+};
+void test()//函数调用
+
+{
+	Calculate c;
+	c.m_a = 10;
+	c.m_b = 10;
+	cout << c.m_a << "+" << c.m_b << "=" << c.get("+") << endl;
+	cout << c.m_a << "-" << c.m_b << "=" << c.get("-") << endl;
+	cout << c.m_a << "*" << c.m_b << "=" << c.get("*") << endl;
+}
+
+
+//用多态继承的方式编写计算器程序
+class Acal//基类
+{
+public:
+	virtual int get()
+	{
+		return 0;
+	}
+	int m_a=0;
+	int m_b=0;
+};
+class Add :public Acal
+{
+public:
+	 int get()
+	{
+		return m_a + m_b;
+	}
+};
+class Sub :public Acal
+{
+public:
+	int get()
+	{
+		return m_a - m_b;
+	}
+};
+class Mul :public Acal
+{
+public:
+	int get()
+	{
+		return m_a * m_b;
+	}
+};
+void test2()
+{
+	Acal* a;//加法运算
+	a = new Add;
+	a->m_a = 10;
+	a->m_b = 10;
+	cout << a->m_a << "+" << a->m_b << "=" << a->get() << endl;
+	delete a;//删除堆区数据
+
+	a = new Sub;//减法运算
+	a->m_a = 10;
+	a->m_b = 10;
+	cout << a->m_a << "-" << a->m_b << "=" << a->get() << endl;
+	delete a;//删除堆区数据
+
+	a = new Mul;//乘法运算
+	a->m_a = 10;
+	a->m_b = 10;
+	cout << a->m_a << "*" << a->m_b << "=" << a->get() << endl;
+	delete a;//删除堆区数据
+}
+int main()
+{ 
+	//test();
+	test2();
+	return 0;
+}
