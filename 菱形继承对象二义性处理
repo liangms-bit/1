@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+
+using namespace std;
+//父类
+class Animal
+{
+public:
+	int m_age;
+};
+class Sheep :virtual public Animal
+{
+
+};
+class Tuo :virtual public Animal
+{
+
+};
+class Sheeptuo :public Sheep, public Tuo
+{
+public:
+
+};
+void test()
+{
+	Sheeptuo s;
+	s.Sheep::m_age = 20;
+	s.Tuo::m_age = 30;
+	cout << "YANG=" << s.Sheep::m_age << endl;
+	cout << "Tuo=" << s.Tuo::m_age << endl;
+	cout << "TuoYang=" << s.m_age << endl;
+}
+int main()
+{ 
+	test();
+	return 0;
+}
