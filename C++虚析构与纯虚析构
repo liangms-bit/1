@@ -1,0 +1,56 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class Animal
+{
+public:
+	Animal()//构造
+	{
+		cout << "Animal 构造函数正在调用" << endl;
+	}
+	virtual	~Animal() = 0;
+	
+	virtual void speak() = 0;//纯虚函数 抽象类
+};
+Animal:: ~Animal()//析构
+{
+	cout << "Animal析构函数正在调用" << endl;
+}
+class Cat :public Animal
+{
+public:
+	Cat(string a)//构造
+	{
+		m_a = new string(a);
+		cout << "Cat构造函数正在调用" << endl;
+	}
+ void speak()//重写spreak()函数
+	{
+		cout << *m_a << "小猫正在说话" << endl;
+	}
+	~Cat()//析构
+	{
+		if (m_a != NULL)
+		{
+			delete m_a;
+			m_a = NULL;
+		}
+		cout << "Cat的析构函数正在调用" << endl;
+	}
+	string *m_a;
+};
+void test()
+{
+	Animal* a = new Cat("Tom");//父类指针范围子类对象
+	a->speak();
+	delete a;
+}
+int main()
+{
+	test();
+
+	return 0;
+}
