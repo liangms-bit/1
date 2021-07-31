@@ -1,0 +1,146 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+//零件类
+class CPU
+{
+public:
+	virtual void calculatr() = 0;
+};
+
+class Videocard//显卡
+{
+public:
+	virtual void display() = 0;
+};
+class Memory//内存条
+{
+public:
+	virtual void storage() = 0;
+};
+
+//Inter供应商类
+class InterCPU :public CPU
+{
+public:
+	virtual void calculatr()
+	{
+		cout << "这是Inter的CPU在工作" << endl;
+	}
+};
+class InterVideocard:public Videocard
+{
+public:
+	virtual void display()
+	{
+		cout << "这是Inter的显卡在工作" << endl;
+	}
+};
+class InterMemory:public Memory
+{
+public:
+	virtual void storage()
+	{
+		cout << "这是Inter的内存条在工作" << endl;
+	}
+};
+
+//lenove供应商类
+class lenoveCPU :public CPU
+{
+public:
+	virtual void calculatr()
+	{
+		cout << "这是lenove的CPU在工作" << endl;
+	}
+};
+class lenoveVideocard :public Videocard
+{
+public:
+	virtual void display()
+	{
+		cout << "这是lenove的显卡在工作" << endl;
+	}
+};
+class lenoveMemory :public Memory
+{
+public:
+	virtual void storage()
+	{
+		cout << "这是lenove的内存条在工作" << endl;
+	}
+};
+
+//电脑类
+class Computer
+{
+public:
+	Computer(CPU* c, Videocard* v, Memory* m)
+	{
+		m_c = c;
+		m_v = v;
+		m_m = m;
+	}
+	void func()
+	{
+		m_c->calculatr();
+		m_v->display();
+		m_m->storage();
+	}
+	~Computer()
+	{
+		if (m_c != NULL)
+		{
+			delete m_c;
+				m_c = NULL;
+		}
+		if (m_v != NULL)
+		{
+			delete m_v;
+			m_v = NULL;
+		}
+		if (m_m != NULL)
+		{
+			delete m_m;
+			m_m = NULL;
+		}
+	}
+private:
+	CPU* m_c;//CPU零件指针
+	Videocard* m_v;//显卡零件指针
+	Memory* m_m;//内存条零件指针
+};
+
+void test()
+{
+	cout << "------------------------第一台电脑正在工作------------------------" << endl;
+	CPU* c = new InterCPU;
+	Videocard* v = new InterVideocard;
+	Memory* m = new InterMemory;
+	Computer* c1=new Computer(c, v, m);
+	c1->func();
+	delete c1;
+
+	cout << "------------------------第二台电脑正在工作------------------------" << endl;
+	Computer* c2 = new Computer(new lenoveCPU, new lenoveVideocard, new lenoveMemory);
+	c2->func();
+	delete c2;
+
+	cout << "------------------------第二台电脑正在工作------------------------" << endl;
+	Computer* c3 = new Computer(new InterCPU, new lenoveVideocard, new lenoveMemory);
+	c3->func();
+	delete c3;
+}
+
+	
+	
+
+int main()
+{
+	test();
+
+	return 0;
+}
