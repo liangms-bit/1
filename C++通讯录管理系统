@@ -1,0 +1,230 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+
+using namespace std;
+#define MAX 100
+void add();
+void print();
+void dele();
+void sercher();
+void revise();
+void clear();
+void exit();
+
+//声明联系人结构体
+struct Person
+{
+	char name[20];
+	int age;
+	char sex[20];
+	char tel[20];
+	char addr[20];
+};
+//声明通讯录结构体，包含当前存储人数数据
+struct CON
+{
+	struct Person date[MAX];
+	int size;
+};
+void initialise(struct CON* p)//初始化通讯录
+{
+	memset(p->date, 0, sizeof(p->date));
+	p->size = 0;
+}
+static int Find(struct CON* p, char name[20])//联系人查找函数
+{
+	int i = 0;
+	for (i = 0; i < p->size; i++)
+	{
+		if (strcmp(p->date[i].name , name)==0)
+		{
+			return i;//查找成功返回联系人所在位置
+
+		}
+			
+	}
+	return -1;//查找失败
+}
+//添加联系人
+void add(struct CON* p)
+{
+	if (p->size == MAX)//检查通讯录是否还有内存
+	{
+		cout << "通讯录已满，请先清理部分内存！" << endl;
+	}
+	else
+	{
+
+		cout << "请输入联系人姓名：" << endl;
+		cin >> p->date[p->size].name;
+		cout << "请输入联系人年龄：" << endl;
+		cin >> p->date[p->size].age;
+		cout << "请输入联系人性别：" << endl;
+		cin >> p->date[p->size].sex;
+		cout << "请输入联系人电话：" << endl;
+		cin >> p->date[p->size].tel;
+		cout << "请输入联系人地址：" << endl;
+		cin >> p->date[p->size].addr;
+		p->size++;
+		cout << "添加成功！" << endl;
+	}
+}
+//打印通讯录数据
+void print(struct CON* p)
+{
+	if (p->size == 0)//检查通讯录是否有数据
+	{
+		cout << "当前通讯录为空！" << endl;
+	}
+	else
+	{
+		
+		cout << "姓名：\t" << "年龄：\t" << "性别：\t" << "电话：\t" << "地址：" << endl;
+		for (int i = 0; i < p->size; i++)
+		{
+			cout << "  " << p->date[i].name << "\t " << p->date[i].age << "\t  " << p->date[i].sex << "\t  " << p->date[i].tel << "\t " << p->date[i].addr << endl;
+		}
+	}
+}
+//删除联系人
+void dele(struct CON* p)
+{
+	char m_name[20] = { 0 };
+	cout << "请输入要删除的联系人姓名：" << endl;
+	cin >> m_name;
+	int r = Find(p, m_name);//先查找通讯录中是否有要删除的人
+	if (r == -1)
+	{
+		cout << "通讯录中没有此人，无法删除！" << endl;
+	}
+	else
+	{
+		int i = 0;
+		for (i = r; i < p->size; i++)
+		{
+			p->date[i] = p->date[i + 1];//i位置数据被i+1位置数据覆盖
+		
+		}
+		p->size--;
+		cout << "删除成功！" << endl;
+	}
+}
+
+//查找联系人
+void sercher(struct CON* p)
+{
+	char m_name[20] = { "0" };
+	cout << "请输入要查找的联系人姓名：" << endl;
+	cin >> m_name;
+	int r = Find(p, m_name);
+	if (r == -1)
+	{
+		cout << "通讯录中没有此人！" << endl;
+	}
+	else
+	{
+		cout << "姓名：\t" << "年龄：\t" << "性别：\t" << "电话：\t" << "地址：" << endl;
+	
+			cout << "  " << p->date[r].name << "\t " << p->date[r].age << "\t  " << p->date[r].sex << "\t  " << p->date[r].tel << "\t " << p->date[r].addr << endl;
+
+	}
+
+}
+
+//修改联系人信息
+void revise(struct CON* p)
+{
+	char m_name[20] = { "0" };
+	cout << "请输入您要编辑的联系人姓名：" << endl;
+	cin >> m_name;
+	int r = Find(p, m_name);
+	if (r == -1)
+	{
+		cout << "通讯录中没有此人！" << endl;
+	}
+	else
+	{
+
+		cout << "请输入联系人姓名：" << endl;
+		cin >> p->date[r].name;
+		cout << "请输入联系人年龄：" << endl;
+		cin >> p->date[r].age;
+		cout << "请输入联系人性别：" << endl;
+		cin >> p->date[r].sex;
+		cout << "请输入联系人电话：" << endl;
+		cin >> p->date[r].tel;
+		cout << "请输入联系人地址：" << endl;
+		cin >> p->date[r].addr;
+	
+		cout << "修改成功！" << endl;
+	}
+}
+
+//清空通讯录，相当于初始化通讯录
+void clear(struct CON* p)
+{
+	memset(p->date, 0, sizeof(p->date));
+	p->size = 0;
+	cout << "已清空通讯录！" << endl;
+}
+void exit()
+{
+	cout << "您已退出通讯录！" << endl;
+}
+//菜单
+void menu()//菜单
+{
+	cout << "********************************** " << endl;
+	cout << "********* 1、添加联系人 ********** " <<endl;
+	cout << "********* 2、显示联系人 ********** " << endl;
+	cout << "********* 3、删除联系人 ********** " << endl;
+	cout << "********* 4、查找联系人 ********** " << endl;
+	cout << "********* 5、修改联系人 ********** " << endl;
+	cout << "********* 6、清空联系人 ********** " << endl;
+	cout << "********* 0、退出通讯录 ********** " << endl;
+	cout << "********************************** " << endl;
+}
+
+int main()
+{
+	int i;
+	struct CON con;//创建对象
+	initialise(&con);//初始化
+	do
+	{
+		menu();
+		cout << "欢迎您进入通讯录系统，请输入您要执行的操作！" << endl;
+		cin >> i;
+		switch (i)
+		{
+		case 1:
+			add(&con);
+			break;
+		case 2:
+			print(&con);
+			break;
+		case 3:
+			dele(&con);
+			break;
+		case 4:
+			sercher(&con);
+			break;
+		case 5:
+			revise(&con);
+			break;
+		case 6:
+			clear(&con);
+			break;
+		case 0:
+			exit();
+			break;
+		default:
+			cout << "您的输入有误，请重新输入！" << endl;
+			break;
+		}
+		
+	} while (i);
+	
+	return 0;
+}
