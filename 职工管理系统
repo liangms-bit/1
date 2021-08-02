@@ -1,0 +1,245 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+using namespace std;
+
+//职工基类
+class Worker
+{
+public:
+
+	//打印职工信息的函数
+	virtual void showmessge() = 0;
+	//打印员工职能的函数
+	virtual string function() = 0;
+	string m_id;
+	string m_name;
+	int m_dep;
+}; 
+//普通职工类
+class Employee :public Worker
+{
+public:
+	Employee(string id, string name, int dep)
+	{
+		this->m_id = id;
+		this->m_name = name;
+		this->m_dep = dep;
+	}
+
+	virtual void showmessge()
+	{
+		cout << "编号：" << this->m_id << "\t姓名：" << this->m_name
+			<< "\t岗位：" << this->function() << "\t岗位职责：完成经理安排的工作。" << endl;
+	}
+	virtual string function()
+	{
+		return string("普通职工");
+	}
+};
+//经理类
+class Manager :public Worker
+{
+public:
+	Manager(string id, string name, int dep)
+	{
+		this->m_id = id;
+		this->m_name = name;
+		this->m_dep = dep;
+	}
+	virtual void showmessge()
+	{
+		cout << "编号：" << this->m_id << "\t姓名：" << this->m_name
+			<< "\t岗位：" << this->function() << "\t岗位职责：完成老板安排的工作。" << endl;
+	}
+	virtual string function()
+	{
+		return string("经理");
+	}
+};
+//老板类
+class Boss :public Worker
+{
+public:
+	Boss(string id, string name, int dep)
+	{
+		this->m_id = id;
+		this->m_name = name;
+		this->m_dep = dep;
+	}
+	virtual void showmessge()
+	{
+		cout << "编号：" << this->m_id << "\t姓名：" << this->m_name
+			<< "\t岗位：" << this->function() << "\t岗位职责：统筹公司所有事务" << endl;
+	}
+	virtual string function()
+	{
+		return string("老板");
+	}
+};
+
+//管理系统类
+class Managesystem
+{
+public:
+	//构造函数
+	Managesystem()
+	{
+		this->m_size = 0;
+		this->m_w = NULL;
+	}
+	//菜单
+
+	void menu()
+	{
+		cout << "********* 欢迎进入职工管理系统 *********" << endl;
+		cout << "********** 1、添加职工信息 **********" << endl;
+		cout << "********** 2、显示保存信息 **********" << endl;
+		cout << "********** 3、删除职工信息 **********" << endl;
+		cout << "********** 4、查找职工信息 **********" << endl;
+		cout << "********** 5、修改职工信息 **********" << endl;
+		cout << "********** 6、排序职工信息 **********" << endl;
+		cout << "********** 7、清空职工信息 **********" << endl;
+		cout << "********** 0、退出管理系统 **********" << endl;
+		cout << "*************************************" << endl;
+	}
+	//退出系统的函数
+	void over()
+	{
+		int i = 0;
+		cout << "是否退出系统？确认退出请输入1！" << endl;
+		cin >> i;
+		if (i == 1)
+		{
+			cout << "已退出职工管理系统！" << endl;
+			exit(0);
+		}
+	}
+	//添加职工信息的函数
+	void addworker()
+	{
+		cout << "请输入要添加的职工数量" << endl;
+		int i=0;
+		cin >> i;
+		if (i > 0)
+		{
+			int newsize = this->m_size + i;
+			Worker** newspace = new Worker* [newsize];//创建新的空间
+			//复制老的数据到新空间中
+			if (this->m_w != NULL)
+			{
+				for (int j = 0; j < this->m_size; j++)
+				{
+					newspace[j] = this->m_w[j];
+				}
+			}
+
+			for (int j = 0; j < i; j++)
+			{
+				string id;
+				string name;
+				int dep;
+				cout << "请输入第" << j+1 << "个员工的编号：" << endl;
+				cin >> id;
+				cout << "请输入第" << j+1 << "个员工的姓名：" << endl;
+				cin >> name;
+				cout << "请输入第" << j+1 << "个员工的岗位编号：" << endl;
+				cout << "1、普通员工 2、经理  3、老板" << endl;
+				cin >> dep;
+
+				Worker* w = NULL;
+				switch (dep)
+				{
+				case 1:
+					w = new Employee(id, name, 1);
+					break;
+				case 2:
+					w = new Manager(id, name, 2);
+					break;
+				case 3:
+					w = new Boss(id, name, 3);
+					break;
+				default:
+					break;
+				}
+				newspace[this->m_size + j] = w;
+				
+			}
+			delete[] this->m_w;
+			this->m_w = newspace;
+			this->m_size=newsize;
+			cout << "成功添加" << i << "名员工" << endl;
+		}
+		else
+			cout << "输入有误，请重新操作！" << endl;
+		system("pause");
+		system("cls");
+	}
+	//析构函数
+	~Managesystem()
+	{
+
+	}
+
+	int m_size;//记录职工人数
+	Worker** m_w;//职工数组指针
+};
+
+//void test()
+//{
+//	Worker* w = new Employee("1011", "张三", 1);
+//	w->showmessge();
+//	delete w;
+//
+//	w = new Manager("1010", "李四", 2);
+//	w->showmessge();
+//	delete w;
+//
+//	w = new Boss("1000", "王五", 3);
+//	w->showmessge();
+//		delete w;
+//}
+int main()
+{
+	Managesystem mag;//创建对象
+	mag.m_size = 0;
+	int select;
+	//当选择不为0时，一直循环
+	while (true)
+	{
+		mag.menu();
+		cout << "请选择您要执行的操作" << endl;
+		cin >> select;
+		//选择执行操作
+		switch (select)
+		{
+		case 1:
+			mag.addworker();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		case 0:
+			mag.over();
+			break;
+		default:
+			cout << "输入错误，请重新输入！" << endl;
+			system("pause");
+			system("cls");
+			break;
+
+		}
+	}
+	
+
+	return 0;
+}
