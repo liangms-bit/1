@@ -1,0 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<iostream>
+#include<string>
+
+using namespace std;
+template<class T>
+void myswap(T& a ,T& b)//交换两个数
+{
+	T tem = a;
+	a = b;
+	b = tem;
+
+}
+
+template<class T>//打印
+void print(T arr[], int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		cout << arr[i] << endl;
+	}
+}
+template<class T>
+void mysort(T arr[],int len)//选择排序
+{
+	for (int i = 0; i < len; i++)
+	{
+		int max = i;
+		for (int j = i + 1; j < len; j++)
+		{
+			if (arr[max] < arr[j])
+			{
+				max = j;
+			}
+		}
+		if (max != i)
+		{
+			myswap(arr[max], arr[i]);
+		}
+	}
+}
+void test()//排序字符数组内的元素
+{
+	char arr[] = "abcdf";
+	mysort(arr, 5);
+	print(arr, 5);
+	
+}
+void test1()//排序整型数组内的元素
+{
+	int intarr[] = { 1, 2, 3, 4, 5 };
+	mysort(intarr, 5);
+	print(intarr, 5);
+
+}
+int main()
+{
+	
+
+	test();
+	test1();
+	return 0;
+}
