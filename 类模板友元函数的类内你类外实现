@@ -1,0 +1,47 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+template<class T1, class T2>
+class Person;
+
+template<class T1, class T2>
+void show2(Person<T1, T2> p)
+{
+	cout << "name:" << p.m_n << "  age:" << p.m_a << endl;
+}
+template<class T1, class T2>
+class Person
+{
+	friend void show(Person<T1,T2> p)
+	{
+		cout << "name:" << p.m_n << "  age:" << p.m_a << endl;
+	}
+	friend void show2<>(Person<T1, T2> p);
+public:
+	Person(T1 n, T2 a);
+private:
+	T1 m_n;
+	T2 m_a;
+};
+
+template<class T1, class T2>
+Person<T1, T2>::Person(T1 n, T2 a)
+{
+	m_n = n;
+	m_a = a;
+}
+
+void test()
+{
+	Person<string, int> p("张三",18);
+	//show(p);
+	show2(p);
+}
+int main()
+{
+	test();
+	return 0;
+}
