@@ -1,0 +1,166 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+template<class T>
+class Arry
+{
+public:
+	Arry(int m_c)//构造函数，初始化对象
+	{
+		//cout << "有参构造函数正在调用" << endl;
+		this->m_capacity = m_c;
+		this->m_size = 0;
+		this->m_a = new T[this->m_capacity];
+	}
+	Arry(const Arry &arr)//拷贝构造函数，可将数组A中的元素全部拷贝到数组B中
+	{
+		
+	//	cout << "拷贝函数正在调用" << endl;
+		this->m_capacity = arr.m_capacity;
+		this->m_size = arr.m_size;
+		this->m_a = new T[arr.m_capacity];
+		for (int i = 0; i < this->m_size; i++)
+		{
+			this->m_a[i] = arr.m_a[i];
+		}
+	}
+	Arry& operator=(const Arry& arr)//=运算符重载，与拷贝构造函数作用相似，但是拷贝前需先将目标对象数组中的内容清空
+	{
+	//	cout << "重载函数正在调用" << endl;
+		if (this->m_a != NULL)//清空目标对象中的内容
+		{
+			delete[] this->m_a;
+			this->m_a = NULL;
+			this->m_capacity = 0;
+			this->m_size = 0;
+		}
+		this->m_capacity = arr.m_capacity;
+		this->m_size = arr.m_size;
+		this->m_a = new T[arr.m_capacity];
+		for (int i = 0; i < this->m_size; i++)
+		{
+			this->m_a[i] = arr.m_a[i];
+		}
+		return *this;
+	}
+	~Arry()
+	{
+		//cout << "析构函数正在调用" << endl;
+		if (this->m_a != NULL)
+		{
+			delete[] this->m_a;
+			this->m_a = NULL;
+		}
+	}
+
+	void insert(const T& a)//尾插法插入数据
+	{
+		if (this->m_size == this->m_capacity)
+		{
+			cout << "内存已满" << endl;
+			return;
+		}
+		else
+		{
+			this->m_a[this->m_size] = a;
+			this->m_size++;
+		}
+	}
+	void Delete()//尾删法删除数据
+	{
+		if (this->m_size == 0)
+		{
+			cout << "数据为0" << endl;
+			return;
+		}
+		this->m_size--;
+	}
+	T& operator[](int i)//[]重载中括号
+	{
+		return this->m_a[i];
+	}
+	int getca()//获取数组容量
+	{
+		return this->m_capacity;
+	}
+	int getsize()//获取数组中元素个数
+	{
+		return this->m_size;
+	}
+	void show(const Arry arr, int size)//打印内置数据类型的数组元素
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << "arr[" << i << "]=" << arr.m_a[i] << endl;
+		}
+	}
+private:
+	T* m_a;//指向数组对象的指针
+	int m_capacity;//数组最大容量
+	int m_size;//数组当前元素个数
+};
+
+void test1()//内置数据类型数组
+{
+	Arry<int> a1(5);
+	for (int i = 0; i < 5; i++)
+	{
+		a1.insert(i);
+    }
+
+	a1.show(a1, a1.getsize());
+	cout << "a1数组容量为：" << a1.getca() << endl;
+	cout << "a1数组大小为：" << a1.getsize() << endl;
+	cout << "************************************" << endl;
+	Arry<int> a2(a1);
+	a2.Delete();
+
+	a2.show(a2, a2.getsize());
+	cout << "a2数组容量为：" << a2.getca() << endl;
+	cout << "a2数组大小为：" << a2.getsize() << endl;
+	cout << "************************************" << endl;
+}
+
+class Person//自定义类
+{
+public:
+	Person()//无参构造函数必需加，Arry中开辟内存空间少了这条会报错
+	{
+
+	}
+	Person(string n, int a)//有参构造函数
+	{
+		this->name = n;
+		this->age = a;
+	}
+	string name; 
+	int age;
+};
+void showPerson(Arry<Person>& arr)//打印自定义数据类型数组元素
+{
+	for (int i = 0; i < arr.getsize(); i++)
+	{
+		cout << "姓名：" << arr[i].name <<"  年龄"<<arr[i].age<< endl;
+	}
+}
+void test2()//自定义数据类型数据
+{
+	Arry<Person> p(5);
+	Person p1("张三",18);
+	Person p2("李四", 19);
+	Person p3("王五", 20);
+	p.insert(p1);
+	p.insert(p2);
+	p.insert(p3);
+	showPerson(p);
+
+}
+int main()
+{
+	test1();
+	test2();
+	return 0;
+}
