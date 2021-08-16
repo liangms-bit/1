@@ -1,0 +1,46 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+#include<vector>//vector容器头文件
+#include<algorithm>//遍历算法头文件
+
+using namespace std;
+
+void show(int i)
+{
+	cout << i << endl;
+}
+void test()
+{
+	vector<int> v;//创建vector容器，数组
+	//写入数据
+	v.push_back(10);
+	v.push_back(20);
+	v.push_back(30);
+	v.push_back(40);
+
+	//通过迭代器访问容器中的数据
+	vector<int>::iterator itBegin = v.begin();//起始迭代器，指向数组中首元素
+	vector<int>::iterator itEnd = v.end();//结束迭代器，指向数组中最后元素的后一位
+
+	//第一种便遍历方法
+	while (itBegin!=itEnd)
+	{		
+			cout << *itBegin << endl;
+			itBegin++;	
+	}
+
+	//第二种遍历
+	for (vector<int>::iterator i = v.begin(); i != v.end(); i++)
+	{
+		cout << *i << endl;
+	}
+
+	//第三种遍历
+	for_each(v.begin(), v.end(), show);
+}
+int main()
+{
+	test();
+	return 0;
+}
