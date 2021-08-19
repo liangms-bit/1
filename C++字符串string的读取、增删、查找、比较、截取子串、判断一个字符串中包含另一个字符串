@@ -1,0 +1,99 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+ 
+using namespace std;
+ 
+void test1()//比较两个字符串
+{
+	string s1;
+	s1.assign("abcdefg");//初始化，赋值
+	string s2 = "vbcdefg";//初始化，赋值
+	if (s1.compare(s2) == 0)//比较大小
+	{
+		cout << "S1等于S2" << endl;
+	}
+	else if (s1.compare(s2) > 0)
+	{
+		cout << "S1大于S2" << endl;
+	}
+	else
+		cout << "S1小于S2" << endl;
+	s1.append(s2);
+	cout << "拼接后的S1为：" <<s1<< endl;
+}
+void test2()//查找并将字符串中字符替换
+{
+	string s1;
+	s1.assign("abcdefgde");//初始化
+	int p = s1.find("de");//查找de首次出现的位置，并返回下标，find（）是从前往后找，rfind（）是从后往前找
+	cout << "替换前S1为：" << s1 << endl;
+	cout << "test2字符串de出现的位置为：" << p << endl;
+	s1.replace(1, 3, "1111");//从第1个字符开始，将其及之后共三个字符替换为1111
+	cout << "替换后S1为：" << s1 << endl;
+	
+}
+ 
+void test3()//读取字符串中的字符
+{
+	string s1 = "hello";
+	for (unsigned int i = 0; i < s1.size(); i++)
+	{
+		cout <<" " <<s1[i];
+	}
+	cout << endl;
+	for (unsigned int i = 0; i < s1.size(); i++)
+	{
+		cout << " " << s1.at(i);
+	}
+	cout << endl;
+	s1[0] = 'c';
+	cout << s1 << endl;
+	cout << endl;
+	s1.at(1) = 'c';
+	cout << s1 << endl;
+}
+void test4()//插入和删除
+{
+	string s1 = "hello";
+	s1.insert(0,"222");//插入
+	cout << s1 << endl;
+	s1.erase(0, 4);
+	cout << s1 << endl;
+}
+void test5()
+{
+	string s1 = "zhangsan@china.com";
+	string s2 = s1.substr(0, 4);
+	cout << s2 << endl;
+	int r = s1.find("@");
+	s2 = s1.substr(0, r);//获取邮件箱中的用户名
+	cout << s2 << endl;
+}
+bool test6()//判断S2字符串是否是S1字符串的字串
+{
+	string s1 = "hello";
+	string s2 = "el";
+	if (s1.find(s2) !=-1)//查找不到find()返回-1，查找到则返回下标值
+	{
+		return true;//是子串
+	}
+	else
+		return false;//不是字串
+}
+int main()
+{
+	//test1();//比较两个字符串
+	//test2();//查找并将字符串中字符替换
+	//test3(); //读取字符串中的字符
+	//test4();//字符串的插入和删除
+	//test5();//截取字符串当中的子串
+	bool i=test6();
+	if (i == true)
+	{
+		cout << "S2是S1的子串" << endl;
+	}
+	else
+		cout << "S2不是S1的子串" << endl;
+	return 0;
+}
