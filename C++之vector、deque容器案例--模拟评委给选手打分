@@ -1,0 +1,80 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+#include<vector>
+#include<deque>
+#include<algorithm>
+#include<ctime>
+using namespace std;
+
+class Person//创建选手类
+{
+public:
+	Person(string n,int s)
+	{
+		this->name = n;
+		this->score = s;
+	}
+public:
+	string name;
+	int score;
+};
+void show(const vector<Person>&p)//打印输出选手信息
+{
+	for (vector<Person>::const_iterator i = p.begin(); i != p.end(); i++)//用迭代器遍历VECTOR容器
+	{
+		cout <<(*i).name << "  平均分：" << (*i).score << endl;
+	}
+}
+void creatPerson(vector<Person> &v)//用vector容器给选手对象初赋初值
+{
+	string arr = "ABCDE";
+	for (int i = 0; i < 5; i++)
+	{
+
+		string name = "选手";
+		name += arr[i];
+		int score = 0;
+		Person p(name, score);
+		v.push_back(p);
+	}
+}
+void setscore(vector<Person> &v)//用dequeron容器存储评委打分分数
+{
+		
+		for (vector<Person>::iterator i = v.begin(); i != v.end(); i++)//用迭代器遍历VECTOR容器
+		{
+			int sum = 0;
+			int arg = 0;
+			deque<int> d;
+			for (int j = 0; j < 10; j++)//评分打分，用deque容器存储
+			{
+				int r = rand()%41 + 60;//随机数60~100
+				d.push_back(r);
+			}
+			cout << (*i).name << "选手得分:" << endl;
+			for (deque<int>::iterator k = d.begin(); k != d.end(); k++)//打印所有评委评分
+			{
+				cout << *k << "  ";
+			}
+			cout << endl;
+			sort(d.begin(), d.end());//deque容器排序
+			d.pop_back();//尾删
+			d.pop_front();//头删
+			for (deque<int>::iterator k=d.begin(); k!=d.end(); k++)//求总分
+			{
+				sum += (*k);
+			}
+			arg = sum / d.size();//求平均数
+			(*i).score = arg;//获得选手最终得分
+		}
+}
+int main()
+{
+	srand((unsigned int)time(NULL));//随机数种子
+	vector<Person> v;//创建vector容器存储Person对象
+	creatPerson(v);//Person对象初始化
+	setscore(v);//获取评委分数
+	show(v);//打印输出选手得分信息
+	return 0;
+}
