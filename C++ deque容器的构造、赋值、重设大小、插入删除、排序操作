@@ -1,0 +1,130 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+#include<deque>
+#include<algorithm>
+using namespace std;
+
+void print(deque<int>& v)//打印输出
+{
+	for (deque<int>::const_iterator i = v.begin(); i != v.end(); i++)
+	{
+		cout << *i << "  ";
+	}
+	cout << endl;
+	
+}
+void test1()//deque容器的构造函数
+{
+	deque<int> v1;//无参构造
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+	print(v1);
+
+	deque<int> v2(v1.begin(), v1.end());//区间构造
+	print(v2);
+
+	deque<int>  v3(10, 100);//n个对象构造
+		print(v3);
+
+		deque<int>  v4;//拷贝构造
+		v4 = v3;
+		print(v4);
+
+		deque<int> v5;//deque容器赋值
+		v5.assign(v4.begin(), v4.end());
+		print(v5);
+
+		deque<int> v6;//deque容器赋值
+		v6.assign(10, 2);
+		print(v6);
+}
+void test2()//deque容器的大小
+{
+	deque<int> v1;//无参构造
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+	if (v1.empty())
+	{
+		cout << "容器为空！" << endl;
+	}
+	else
+	{
+		print(v1);
+		cout << "容器不为空，其大小为：" << v1.size() << endl;
+	}
+	v1.resize(15);//reszie(),重设deque容器大小
+	print(v1);
+	cout << "A容器大小为：" << v1.size() << endl;
+	v1.resize(20, 1);
+	print(v1);
+	cout << "B容器大小为：" << v1.size() << endl;
+	v1.resize(5);
+	print(v1);
+	cout << "C容器大小为：" << v1.size() << endl;
+
+}
+
+void test3()//deque容器的插入与删除
+{
+	deque<int> v1;//无参构造
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+	print(v1);
+	cout << "尾插：";
+	v1.push_back(100);
+	print(v1);
+	cout << "头插：";
+	v1.push_front(200);
+	print(v1);
+	cout << "尾删：";
+	v1.pop_back();
+	print(v1);
+	cout << "头删：";
+	v1.pop_front();
+	print(v1);
+	cout << "在迭代器指定位置插入3个元素：";
+	v1.insert(v1.begin(), 3,99);//insert()插入，在迭代器指定位置插入3个元素，insert（v1.begin(),5）只插入1个元素5
+	print(v1);
+	cout << "在迭代器指定位置插入区间元素：";
+	v1.insert(v1.end(),v1.begin(), v1.end()); //在指定位置插入一个区间
+	print(v1);
+	cout << "删除指定位置的元素：";
+	v1.erase(v1.begin());//
+	print(v1);
+	cout << "删除指定区间元素：";
+	v1.erase(v1.begin(), v1.begin() + 12);
+	print(v1);
+	cout << "清空deque容器中的所有元素" << endl;
+	v1.clear();
+	print(v1);
+	
+}
+void test4()//对deque容器内元素进行排序
+{
+	deque<int> v1;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_front(10);
+	v1.push_front(20);
+	v1.push_front(30);
+	print(v1);
+	sort(v1.begin(), v1.end());
+	cout << "排序后：";
+	print(v1);
+}
+int main()
+{
+	//test1();//deque容器的构造函数
+	//test2();//deque容器大小操作
+	//test3();//deque容器的插入与删除
+	test4();//对deque容器内元素进行排序
+	return 0;
+}
