@@ -1,0 +1,174 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+ 
+void printvec(vector<int>& v)
+{
+	for (vector<int>::iterator i = v.begin(); i != v.end(); i++)
+	{
+		cout << *i << "  ";
+	}
+	cout << endl;
+}
+void test1()//vector构造函数
+{
+	vector<int> v1;//无参构造
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+	printvec(v1);
+ 
+	vector<int> v2(10, 100);//10个由100组成的数初始化V2
+	printvec(v2);
+ 
+	vector<int> v3(v2);//拷贝构造
+	printvec(v3);
+ 
+	vector<int> v4(v1.begin(), v1.end());//用区间方式进行构造
+	printvec(v4);
+}
+void test2()//vector赋值操作
+{
+	vector<int> v1;
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+ 
+	vector<int> v2;//等号赋值
+	v2 = v1;
+	printvec(v2);
+ 
+	vector<int> v3;//assign区间赋值
+	v3.assign(v1.begin(), v1.end());
+	printvec(v3);
+ 
+	vector<int> v4;//n个对象赋值
+	v4.assign(10, 100);
+	printvec(v4);
+}
+ 
+void test3()//vector容量与大小
+{
+	vector<int> v1;//初始化
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+	if (v1.empty() == true)
+	{
+		cout << "V1为空" << endl;
+	}
+	else
+	{
+		cout << "V1不为空" << endl;
+		cout << "V1容量为：" << v1.capacity() << endl;;
+		cout << "V1数据个数：" << v1.size() << endl;
+		printvec(v1);
+ 
+		v1.resize(15);//重设vector大小，若变大，多出来的位置默认用0天填充
+		cout << "V1容量为：" << v1.capacity() << endl;;
+		cout << "V1数据个数：" << v1.size() << endl;
+		printvec(v1);
+ 
+		v1.resize(20,100);//可指定默认填充值
+		cout << "V1容量为：" << v1.capacity() << endl;;
+		cout << "V1数据个数：" << v1.size() << endl;
+		printvec(v1);
+ 
+		v1.resize(5);//重设大小，若变小，多出来的部分会被删除
+		cout << "V1容量为：" << v1.capacity() << endl;;
+		cout << "V1数据个数：" << v1.size() << endl;
+		printvec(v1);
+	}
+}
+void test4()//删除与插入
+{
+	vector<int> v1;//初始化
+	v1.push_back(10);//在数值末端插入元素
+	v1.push_back(20);
+	v1.push_back(30);
+	v1.push_back(40);
+	printvec(v1);
+ 
+	v1.pop_back();//删除vector容器数组末端一个元素
+	printvec(v1);
+ 
+	v1.insert( v1.begin(),2,100);//在起始位置插入2个元素，位置为迭代器指向位置，不可为整型
+	printvec(v1);
+ 
+	v1.erase( v1.begin());//删除起始位置1个元素
+	printvec(v1);
+ 
+	v1.clear();//等价于 erase(v1.begin(),v1.end())  ,清空vector内所有元素
+	printvec(v1);
+}
+void test5()//访问vector容器数组中的元素
+{
+	
+	vector<int> v1;//初始化
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+ 
+	for (unsigned int i = 0; i < v1.size(); i++)//中括号访问元素
+	{
+		cout << v1[i] << "  ";
+	}
+	cout << endl;
+	for (unsigned int i = 0; i < v1.size(); i++)//at()函数访问vector容器数组元素
+	{
+		cout << v1.at(i) << "  ";
+	}
+	cout << endl;
+	cout << v1.front() <<"   " <<v1.back() << endl;//vector容器访问首元素与最后一个元素
+}
+void test6()//交换容器
+{
+	vector<int> v1;//初始化
+	for (int i = 0; i < 10; i++)
+	{
+		v1.push_back(i);
+	}
+	printvec(v1);
+ 
+	vector<int> v2;//初始化
+	for (int i = 0; i < 10; i++)
+	{
+		v2.push_back(i+10);
+	}
+	printvec(v2);
+	cout << "交换后" << endl;
+	v1.swap(v2);//交换v1和v2
+	printvec(v1);
+	printvec(v2);
+ 
+	vector<int> v3;//初始化
+	for (int i = 0; i < 10000; i++)
+	{
+		v3.push_back(i);
+	}
+	cout << "V3容量：" << v3.capacity() << "   大小：" << v3.size() << endl;
+	v3.resize(5);
+	cout << "V3容量：" << v3.capacity() << "   大小：" << v3.size() << endl;
+ 
+	vector<int>(v3).swap(v3);//创建匿名对象进行容器交换，可压缩空间，匿名对象调用拷贝构造产生产生，其容量与大小与v3当前大小相当
+	cout << "V3容量：" << v3.capacity() << "   大小：" << v3.size() << endl;
+}
+int main()
+{
+	//test1();//vector构造函数
+	//test2();//vector赋值操作
+	//test3();//vector容量大小操作
+	//test4();//删除与插入 
+	//test5();//访问vector容器中数据
+	test6();//交换容器
+	return 0;
+}
+————————————————
+版权声明：本文为CSDN博主「梁梦笙」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_41604212/article/details/119856959
